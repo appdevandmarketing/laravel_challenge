@@ -54,7 +54,7 @@ class ApplicationTest extends TestCase
             ->assertStatus(422);
     }
 
-    public function test_retrieve_user_info()
+    public function test_retrieving_user_info()
     {
         Passport::actingAs(
         // Need to update the factory or else this will fail
@@ -73,6 +73,11 @@ class ApplicationTest extends TestCase
             ->assertSee('created_at');
 
         $response->assertStatus(201);
+    }
+    
+    public function test_retrieving_user_info_without_auth_user()
+    {
+        $this->getJson('/api/user')->assertStatus(401);
     }
 
 
